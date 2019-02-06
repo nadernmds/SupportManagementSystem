@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+<link href="~/Content/Print.css" rel="stylesheet" />
+<!--panel-->
+<!--panel-->
+<!-- Default panel contents -->
+
+<div id="ReportForm">
+    <div class="form-horizontal">
+        <hr />
+        @using (Ajax.BeginForm("generate", new AjaxOptions() { HttpMethod = "post", UpdateTargetId = "printable" }))
+        {
+            <div class="form-group">
+                @Html.Label("از تاریخ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("from", null, htmlAttributes: new { @class = "form-control", autocomplete = "off" })
+                </div>
+            </div>        <div class="form-group">
+                @Html.Label("تا تاریخ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("to", null , htmlAttributes: new { @class = "form-control", autocomplete = "off" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("کاربر", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("userID", null, "انتخاب کاربر", htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("پروژه", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("projectID", null, "انتخاب پروژه", htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("شرکت", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("companyID", null, "انتخاب شرکت", htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default" name="state" value="full">گزارش کلی</button>
+            <button type="submit" class="btn btn-default" name="state" value="detailed">گزارش جزیی</button>
+            <button type="submit" class="btn btn-default" name="state" value="CompanyAndProject">گزارش به تفکیک شرکت </button>
+            <button type="submit" class="btn btn-default" name="state" value="ProjectAndCompany">گزارش به تفکیک  پروژه</button>
+            <button class="btn btn-default" type="button" onclick="print()">چاپ</button>
+        }
+    </div>
+    <br />
+    <br />
+    <hr />
+</div>
+<div id="printable">
+    
+</div>
+
+@section Scripts{
+    <script>
+        $(".printReport").click(function () {
+            print();
+        });
+    </script>
+}
+

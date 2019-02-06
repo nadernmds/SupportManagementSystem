@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<SupportManagemantSystem.Models.SelectCompanyModel>
+@{
+    ViewBag.Title = "انتخاب شرکت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>برای کدام شرکت میخواهید تنظیمات را دریافت کنید؟؟؟</p>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        foreach (var item2 in item.projects)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div style="direction:ltr !important" class="col-xs-3">
+                                <i class="fa fa-building fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"></div>
+                                <div>@item2.Project.name @item.name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/query/settings" method="post">
+                        <input type="hidden" name="CompanyID" value="@item.companyID" />
+                        <input type="hidden" name="projectID" value="@item2.projectID" />
+                        <button type="submit" style="    background:none!important;border:none;padding:0!important;">
+                            <div style="direction:ltr !important" class="panel-footer">
+                                <span>دریافت تنظیمات</span>
+                                <span><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>

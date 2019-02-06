@@ -1,0 +1,188 @@
+﻿@using pep;
+@model IEnumerable<SupportManagemantSystem.Models.Ticket>
+
+@{
+    ViewBag.Title = "تیکت های من";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>تیکت های من</h2>
+
+<h2>تیکت ها</h2>
+@foreach (var item in Model)
+{
+    <div class="col-lg-8 pull-right">
+        <div class="panel  panel-@(Common.getStateColor(item.statusID.Value))">
+            <div class="panel-heading">
+                <a href="/ticket/Askagain/@item.ticketID" style="color:white">
+                    @item.Requests.LastOrDefault().User.name : @item.title
+
+                    <span class="pull-left">@item.Status.state | @item.Requests.LastOrDefault().date.Value.toPersianDateString()</span>
+                </a>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @item.Requests.LastOrDefault().text
+                </p>
+            </div>
+            <div class="panel-footer">
+                @item.Project.name
+                <span class="pull-left">شرکت: @item.Company.name</span>
+            </div>
+        </div>
+    </div>
+}
+
+@*foreach (var item in Model)
+    {
+    <div class="col-lg-9 pull-right">
+        <div class="panel panel-@(Common.getStateColor(item.statusID.Value))">
+            <div class="panel-heading">
+                @item.Requests.name : @item.title
+                درباره @item.Project.name
+                <span class="pull-left">@item.Status.state</span>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @item.text
+                </p>
+            </div>
+            <div class="panel-footer">
+                @if (!string.IsNullOrEmpty(item.estimatedDate))
+                {
+                    <span style="direction:rtl">موعد تقریبی انجام کار @item.estimatedDate</span>
+                }
+                <br />
+                @item.Company.name
+                @if (item.TicketFiles.Count > 0)
+                {
+                    <a href="/ticket/files/@item.ticketID" class="pull-left">ضمایم</a>
+                }
+
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+
+    if (item.answererID.HasValue)
+    {
+
+    }
+    }
+
+
+
+    @foreach (var item in Model.Where(c => c.parentTicketID == null))
+    {
+        <div class="col-lg-9 pull-right">
+            <div class="panel panel-@(Common.getStateColor(item.statusID.Value))">
+                <div class="panel-heading">
+                    @item.User1.name : @item.title
+                    درباره @item.Project.name
+                    <span class="pull-left">@item.Status.state</span>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        @item.text
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    @if (!string.IsNullOrEmpty(item.estimatedDate))
+                    {
+                        <span style="direction:rtl">موعد تقریبی انجام کار @item.estimatedDate</span>
+                    }
+                    <br />
+                    @item.Company.name
+                    @if (item.TicketFiles.Count > 0)
+                    {
+                        <a href="/ticket/files/@item.ticketID" class="pull-left">ضمایم</a>
+                    }
+
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+
+        if (item.answererID.HasValue)
+        {
+            <div class="col-lg-9 pull-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @item.User.name : @item.title
+                        درباره @item.Project.name
+                        @*<span class="pull-left">@item.Status.state</span>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>
+                                                    @item.answer
+                                                </p>
+                                            </div>
+                                            <div class="panel-footer">
+
+                                                @item.Company.name
+                                                @if (item.statusID == 3 || item.statusID == 4)
+                                                {
+                                                    <a class="pull-left" href="/ticket/askAgain/@item.ticketID">| ارسال جواب</a>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- /.col-lg-4 -->
+                                    </div>
+                                }
+                                foreach (var item2 in item.Ticket1)
+                                {
+                                    <div class="col-lg-9 pull-right">
+                                        <div class="panel panel-@(Common.getStateColor(item2.statusID.Value))">
+                                            <div class="panel-heading">
+                                                @item2.User1.name : @item2.title
+                                                درباره @item2.Project.name
+                                                <span class="pull-left">@item2.Status.state</span>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>
+                                                    @item2.text
+                                                </p>
+                                            </div>
+                                            <div class="panel-footer">
+                                                @if (!string.IsNullOrEmpty(item2.estimatedDate))
+                                                {
+                                                    <span style="direction:rtl">موعد تقریبی انجام کار @item2.estimatedDate</span>
+                                                }
+                                                <br />
+                                                @item2.Company.name
+                                                @if (item2.TicketFiles.Count > 0)
+                                                {
+                                                    <a href="/ticket/files/@item2.ticketID" class="pull-left">ضمایم</a>
+                                                }
+
+                                            </div>
+                                        </div>
+                                        <!-- /.col-lg-4 -->
+                                    </div>
+                                    if (item2.answererID.HasValue)
+                                    {
+                                        <div class="col-lg-9 pull-left">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    @item2.User.name : @item2.title
+                                                    درباره @item2.Project.name
+                                                    @*<span class="pull-left">@item2.Status.state</span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <p>
+                                                        @item2.answer
+                                                    </p>
+                                                </div>
+                                                <div class="panel-footer">
+
+                                                    @item2.Company.name                    @if (item2.statusID == 3 || item2.statusID == 4)
+                                                    {
+                                                        <a class="pull-left" href="/ticket/askAgain/@item2.parentTicketID">| ارسال جواب</a>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!-- /.col-lg-4 -->
+                                        </div>
+                                    }
+                                }
+                            }*@

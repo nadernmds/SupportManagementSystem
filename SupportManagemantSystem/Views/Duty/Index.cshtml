@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Duty>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("جدید", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requiredTime)
+        </th>
+        <th>
+            وضعیت
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Request.text)
+        </th>
+        <th>
+            ثبت کننده
+        </th>
+        <th>
+            کارشناس
+        </th>
+        <th>
+            اولویت
+        </th>
+        <th>
+            پروژه
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requiredTime)
+            </td>
+            <td>
+               @(item.done.Value?"پایان یافته":"نا تمام")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User1.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Piority.piorityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.name)
+            </td>
+            <td>
+                @Html.ActionLink("ویرایش", "Edit", new { id = item.dutyID }) |
+                @*@Html.ActionLink("مشاهده", "Details", new { id = item.dutyID }) |*@
+                @Html.ActionLink("حذف", "Delete", new { id = item.dutyID })
+            </td>
+        </tr>
+    }
+
+</table>

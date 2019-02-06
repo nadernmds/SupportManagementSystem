@@ -1,0 +1,2264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SupportManagemantSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="CompanyProject">
+          <Key>
+            <PropertyRef Name="companyProjectID" />
+          </Key>
+          <Property Name="companyProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="projectID" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyUser">
+          <Key>
+            <PropertyRef Name="companyUserID" />
+          </Key>
+          <Property Name="companyUserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="companyID" Type="int" />
+        </EntityType>
+        <EntityType Name="Doing">
+          <Key>
+            <PropertyRef Name="doingID" />
+          </Key>
+          <Property Name="doingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="startdate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="userID" Type="int" />
+          <Property Name="dutyID" Type="bigint" />
+          <Property Name="timeDistanse" Type="int" />
+        </EntityType>
+        <EntityType Name="Duty">
+          <Key>
+            <PropertyRef Name="dutyID" />
+          </Key>
+          <Property Name="dutyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="requiredTime" Type="int" />
+          <Property Name="piorityID" Type="tinyint" />
+          <Property Name="done" Type="bit" />
+          <Property Name="requestID" Type="bigint" />
+          <Property Name="registerID" Type="int" />
+          <Property Name="referedToUserID" Type="int" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="companyID" Type="int" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="errorID" />
+          </Key>
+          <Property Name="errorID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="errorCodes" Type="nvarchar(max)" />
+          <Property Name="done" Type="bit" />
+        </EntityType>
+        <EntityType Name="Execute">
+          <Key>
+            <PropertyRef Name="executID" />
+          </Key>
+          <Property Name="executID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="queryID" Type="bigint" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EXEFile">
+          <Key>
+            <PropertyRef Name="exeID" />
+          </Key>
+          <Property Name="exeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="nvarchar" MaxLength="50" />
+          <Property Name="changes" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="messageID" />
+          </Key>
+          <Property Name="messageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="nvarchar(max)" />
+          <Property Name="title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MessageReciever">
+          <Key>
+            <PropertyRef Name="messageRecieverID" />
+          </Key>
+          <Property Name="messageRecieverID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="messageID" Type="bigint" />
+          <Property Name="seen" Type="bit" />
+        </EntityType>
+        <EntityType Name="Piority">
+          <Key>
+            <PropertyRef Name="piorityID" />
+          </Key>
+          <Property Name="piorityID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="piorityName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="projectID" />
+          </Key>
+          <Property Name="projectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="queryID" />
+          </Key>
+          <Property Name="queryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="queryCommand" Type="nvarchar(max)" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="userID" Type="int" />
+          <Property Name="type" Type="tinyint" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="companyID" Type="int" />
+        </EntityType>
+        <EntityType Name="QueryType">
+          <Key>
+            <PropertyRef Name="queryTypeID" />
+          </Key>
+          <Property Name="queryTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="requestID" />
+          </Key>
+          <Property Name="requestID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketID" Type="bigint" />
+          <Property Name="text" Type="nvarchar(max)" />
+          <Property Name="askerID" Type="int" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="responseID" />
+          </Key>
+          <Property Name="responseID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketID" Type="bigint" />
+          <Property Name="answer" Type="nvarchar(max)" />
+          <Property Name="answererID" Type="int" />
+          <Property Name="estimatedDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="requestID" Type="bigint" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskID" />
+          </Key>
+          <Property Name="taskID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="decription" Type="nvarchar" MaxLength="2000" />
+          <Property Name="date" Type="nvarchar" MaxLength="50" />
+          <Property Name="spentTime" Type="float" />
+          <Property Name="ticketID" Type="bigint" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ticketID" />
+          </Key>
+          <Property Name="ticketID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" />
+          <Property Name="statusID" Type="tinyint" />
+          <Property Name="callNumber" Type="varchar" MaxLength="50" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="companyID" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketFile">
+          <Key>
+            <PropertyRef Name="ticketFileID" />
+          </Key>
+          <Property Name="ticketFileID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="requestID" Type="bigint" />
+          <Property Name="responseID" Type="bigint" />
+          <Property Name="messageID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="userGroupID" Type="int" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="userGroupID" />
+          </Key>
+          <Property Name="userGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserProjects">
+          <Key>
+            <PropertyRef Name="userProjectID" />
+          </Key>
+          <Property Name="userProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <Association Name="FK_CompanyProject_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompanyProject" Type="Self.CompanyProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyProject">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyProject_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompanyProject" Type="Self.CompanyProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="CompanyProject">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyUser_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompanyUser" Type="Self.CompanyUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyUser">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CompanyUser" Type="Self.CompanyUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="CompanyUser">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doing_Duty">
+          <End Role="Duty" Type="Self.Duty" Multiplicity="0..1" />
+          <End Role="Doing" Type="Self.Doing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duty">
+              <PropertyRef Name="dutyID" />
+            </Principal>
+            <Dependent Role="Doing">
+              <PropertyRef Name="dutyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doing_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Doing" Type="Self.Doing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Doing">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Duty" Type="Self.Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Piority">
+          <End Role="Piority" Type="Self.Piority" Multiplicity="0..1" />
+          <End Role="Duty" Type="Self.Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piority">
+              <PropertyRef Name="piorityID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="piorityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Duty" Type="Self.Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="0..1" />
+          <End Role="Duty" Type="Self.Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Duty" Type="Self.Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="registerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Duty" Type="Self.Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="referedToUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Error_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Error" Type="Self.Error" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Error">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Error_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Error" Type="Self.Error" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Error">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executes_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Execute" Type="Self.Execute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Execute">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executes_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Execute" Type="Self.Execute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Execute">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executes_Queries">
+          <End Role="Query" Type="Self.Query" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Execute" Type="Self.Execute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Query">
+              <PropertyRef Name="queryID" />
+            </Principal>
+            <Dependent Role="Execute">
+              <PropertyRef Name="queryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_messageReciever_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="MessageReciever" Type="Self.MessageReciever" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="MessageReciever">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_messageReciever_Message">
+          <End Role="Message" Type="Self.Message" Multiplicity="0..1" />
+          <End Role="MessageReciever" Type="Self.MessageReciever" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="messageID" />
+            </Principal>
+            <Dependent Role="MessageReciever">
+              <PropertyRef Name="messageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Query" Type="Self.Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Query" Type="Self.Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_QueryType">
+          <End Role="QueryType" Type="Self.QueryType" Multiplicity="0..1" />
+          <End Role="Query" Type="Self.Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QueryType">
+              <PropertyRef Name="queryTypeID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Query" Type="Self.Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="ticketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="askerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="0..1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="ticketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="answererID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ticketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketFile_Message">
+          <End Role="Message" Type="Self.Message" Multiplicity="0..1" />
+          <End Role="TicketFile" Type="Self.TicketFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="messageID" />
+            </Principal>
+            <Dependent Role="TicketFile">
+              <PropertyRef Name="messageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketFile_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TicketFile" Type="Self.TicketFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="TicketFile">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketFile_Response">
+          <End Role="Response" Type="Self.Response" Multiplicity="0..1" />
+          <End Role="TicketFile" Type="Self.TicketFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="responseID" />
+            </Principal>
+            <Dependent Role="TicketFile">
+              <PropertyRef Name="responseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="userGroupID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="userGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjects_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="UserProjects" Type="Self.UserProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="UserProjects">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjects_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProjects" Type="Self.UserProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserProjects">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetLastExecute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyID" Type="int" Mode="In" />
+          <Parameter Name="projectID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SupportManagemantSystemModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyProject" EntityType="Self.CompanyProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyUser" EntityType="Self.CompanyUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doing" EntityType="Self.Doing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Duty" EntityType="Self.Duty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Execute" EntityType="Self.Execute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXEFile" EntityType="Self.EXEFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageReciever" EntityType="Self.MessageReciever" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piority" EntityType="Self.Piority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Query" EntityType="Self.Query" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QueryType" EntityType="Self.QueryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketFile" EntityType="Self.TicketFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProjects" EntityType="Self.UserProjects" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CompanyProject_Company" Association="Self.FK_CompanyProject_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyProject" EntitySet="CompanyProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyProject_Project" Association="Self.FK_CompanyProject_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="CompanyProject" EntitySet="CompanyProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUser_Company" Association="Self.FK_CompanyUser_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyUser" EntitySet="CompanyUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUser_User" Association="Self.FK_CompanyUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyUser" EntitySet="CompanyUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doing_Duty" Association="Self.FK_Doing_Duty">
+            <End Role="Duty" EntitySet="Duty" />
+            <End Role="Doing" EntitySet="Doing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doing_User" Association="Self.FK_Doing_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Doing" EntitySet="Doing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Company" Association="Self.FK_Duty_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Duty" EntitySet="Duty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Piority" Association="Self.FK_Duty_Piority">
+            <End Role="Piority" EntitySet="Piority" />
+            <End Role="Duty" EntitySet="Duty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Project" Association="Self.FK_Duty_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Duty" EntitySet="Duty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Request" Association="Self.FK_Duty_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="Duty" EntitySet="Duty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_User" Association="Self.FK_Duty_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Duty" EntitySet="Duty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_User1" Association="Self.FK_Duty_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Duty" EntitySet="Duty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Error_Company" Association="Self.FK_Error_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Error" EntitySet="Error" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Error_Project" Association="Self.FK_Error_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Error" EntitySet="Error" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executes_Company" Association="Self.FK_Executes_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Execute" EntitySet="Execute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executes_Project" Association="Self.FK_Executes_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Execute" EntitySet="Execute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executes_Queries" Association="Self.FK_Executes_Queries">
+            <End Role="Query" EntitySet="Query" />
+            <End Role="Execute" EntitySet="Execute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_messageReciever_Company" Association="Self.FK_messageReciever_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="MessageReciever" EntitySet="MessageReciever" />
+          </AssociationSet>
+          <AssociationSet Name="FK_messageReciever_Message" Association="Self.FK_messageReciever_Message">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="MessageReciever" EntitySet="MessageReciever" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_Company" Association="Self.FK_Query_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Query" EntitySet="Query" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_Project" Association="Self.FK_Query_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Query" EntitySet="Query" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_QueryType" Association="Self.FK_Query_QueryType">
+            <End Role="QueryType" EntitySet="QueryType" />
+            <End Role="Query" EntitySet="Query" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_User" Association="Self.FK_Query_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Query" EntitySet="Query" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_ticket" Association="Self.FK_Request_ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="Self.FK_Request_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Request" Association="Self.FK_Response_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_ticket" Association="Self.FK_Response_ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_User" Association="Self.FK_Response_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Company" Association="Self.FK_Task_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Project" Association="Self.FK_Task_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Ticket" Association="Self.FK_Task_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="Self.FK_Task_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_Company" Association="Self.FK_ticket_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_Project" Association="Self.FK_ticket_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_Status" Association="Self.FK_ticket_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketFile_Message" Association="Self.FK_TicketFile_Message">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="TicketFile" EntitySet="TicketFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketFile_Request" Association="Self.FK_TicketFile_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="TicketFile" EntitySet="TicketFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketFile_Response" Association="Self.FK_TicketFile_Response">
+            <End Role="Response" EntitySet="Response" />
+            <End Role="TicketFile" EntitySet="TicketFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjects_Project" Association="Self.FK_UserProjects_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="UserProjects" EntitySet="UserProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjects_User" Association="Self.FK_UserProjects_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProjects" EntitySet="UserProjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SupportManagemantSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SupportManagemantSystemEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="pep" />
+          <FunctionImport Name="GetLastExecute" ReturnType="Collection(DateTime)">
+            <Parameter Name="companyID" Mode="In" Type="Int32" />
+            <Parameter Name="projectID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Companies" EntityType="SupportManagemantSystemModel.Company" />
+          <EntitySet Name="CompanyProjects" EntityType="SupportManagemantSystemModel.CompanyProject" />
+          <EntitySet Name="CompanyUsers" EntityType="SupportManagemantSystemModel.CompanyUser" />
+          <EntitySet Name="Doings" EntityType="SupportManagemantSystemModel.Doing" />
+          <EntitySet Name="Duties" EntityType="SupportManagemantSystemModel.Duty" />
+          <EntitySet Name="Errors" EntityType="SupportManagemantSystemModel.Error" />
+          <EntitySet Name="Executes" EntityType="SupportManagemantSystemModel.Execute" />
+          <EntitySet Name="EXEFiles" EntityType="SupportManagemantSystemModel.EXEFile" />
+          <EntitySet Name="Messages" EntityType="SupportManagemantSystemModel.Message" />
+          <EntitySet Name="MessageRecievers" EntityType="SupportManagemantSystemModel.MessageReciever" />
+          <EntitySet Name="Piorities" EntityType="SupportManagemantSystemModel.Piority" />
+          <EntitySet Name="Projects" EntityType="SupportManagemantSystemModel.Project" />
+          <EntitySet Name="Queries" EntityType="SupportManagemantSystemModel.Query" />
+          <EntitySet Name="QueryTypes" EntityType="SupportManagemantSystemModel.QueryType" />
+          <EntitySet Name="Requests" EntityType="SupportManagemantSystemModel.Request" />
+          <EntitySet Name="Responses" EntityType="SupportManagemantSystemModel.Response" />
+          <EntitySet Name="Status" EntityType="SupportManagemantSystemModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="SupportManagemantSystemModel.sysdiagram" />
+          <EntitySet Name="Tasks" EntityType="SupportManagemantSystemModel.Task" />
+          <EntitySet Name="Tickets" EntityType="SupportManagemantSystemModel.Ticket" />
+          <EntitySet Name="TicketFiles" EntityType="SupportManagemantSystemModel.TicketFile" />
+          <EntitySet Name="Users" EntityType="SupportManagemantSystemModel.User" />
+          <EntitySet Name="UserGroups" EntityType="SupportManagemantSystemModel.UserGroup" />
+          <EntitySet Name="UserProjects" EntityType="SupportManagemantSystemModel.UserProject" />
+          <AssociationSet Name="FK_CompanyProject_Company" Association="SupportManagemantSystemModel.FK_CompanyProject_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyProject" EntitySet="CompanyProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUser_Company" Association="SupportManagemantSystemModel.FK_CompanyUser_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyUser" EntitySet="CompanyUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Company" Association="SupportManagemantSystemModel.FK_Duty_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Duty" EntitySet="Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Error_Company" Association="SupportManagemantSystemModel.FK_Error_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Error" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executes_Company" Association="SupportManagemantSystemModel.FK_Executes_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Execute" EntitySet="Executes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_messageReciever_Company" Association="SupportManagemantSystemModel.FK_messageReciever_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="MessageReciever" EntitySet="MessageRecievers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_Company" Association="SupportManagemantSystemModel.FK_Query_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Query" EntitySet="Queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Company" Association="SupportManagemantSystemModel.FK_Task_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_Company" Association="SupportManagemantSystemModel.FK_ticket_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyProject_Project" Association="SupportManagemantSystemModel.FK_CompanyProject_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="CompanyProject" EntitySet="CompanyProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUser_User" Association="SupportManagemantSystemModel.FK_CompanyUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyUser" EntitySet="CompanyUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doing_Duty" Association="SupportManagemantSystemModel.FK_Doing_Duty">
+            <End Role="Duty" EntitySet="Duties" />
+            <End Role="Doing" EntitySet="Doings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doing_User" Association="SupportManagemantSystemModel.FK_Doing_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Doing" EntitySet="Doings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Piority" Association="SupportManagemantSystemModel.FK_Duty_Piority">
+            <End Role="Piority" EntitySet="Piorities" />
+            <End Role="Duty" EntitySet="Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Project" Association="SupportManagemantSystemModel.FK_Duty_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Duty" EntitySet="Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_Request" Association="SupportManagemantSystemModel.FK_Duty_Request">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="Duty" EntitySet="Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_User" Association="SupportManagemantSystemModel.FK_Duty_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Duty" EntitySet="Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Duty_User1" Association="SupportManagemantSystemModel.FK_Duty_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Duty" EntitySet="Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Error_Project" Association="SupportManagemantSystemModel.FK_Error_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Error" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executes_Project" Association="SupportManagemantSystemModel.FK_Executes_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Execute" EntitySet="Executes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executes_Queries" Association="SupportManagemantSystemModel.FK_Executes_Queries">
+            <End Role="Query" EntitySet="Queries" />
+            <End Role="Execute" EntitySet="Executes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_messageReciever_Message" Association="SupportManagemantSystemModel.FK_messageReciever_Message">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="MessageReciever" EntitySet="MessageRecievers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketFile_Message" Association="SupportManagemantSystemModel.FK_TicketFile_Message">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="TicketFile" EntitySet="TicketFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_Project" Association="SupportManagemantSystemModel.FK_Query_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Query" EntitySet="Queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Project" Association="SupportManagemantSystemModel.FK_Task_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_Project" Association="SupportManagemantSystemModel.FK_ticket_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjects_Project" Association="SupportManagemantSystemModel.FK_UserProjects_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="UserProject" EntitySet="UserProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_QueryType" Association="SupportManagemantSystemModel.FK_Query_QueryType">
+            <End Role="QueryType" EntitySet="QueryTypes" />
+            <End Role="Query" EntitySet="Queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_User" Association="SupportManagemantSystemModel.FK_Query_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Query" EntitySet="Queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_ticket" Association="SupportManagemantSystemModel.FK_Request_ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="SupportManagemantSystemModel.FK_Request_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Request" Association="SupportManagemantSystemModel.FK_Response_Request">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketFile_Request" Association="SupportManagemantSystemModel.FK_TicketFile_Request">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="TicketFile" EntitySet="TicketFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_ticket" Association="SupportManagemantSystemModel.FK_Response_ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_User" Association="SupportManagemantSystemModel.FK_Response_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketFile_Response" Association="SupportManagemantSystemModel.FK_TicketFile_Response">
+            <End Role="Response" EntitySet="Responses" />
+            <End Role="TicketFile" EntitySet="TicketFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_Status" Association="SupportManagemantSystemModel.FK_ticket_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Ticket" Association="SupportManagemantSystemModel.FK_Task_Ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="SupportManagemantSystemModel.FK_Task_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserGroup" Association="SupportManagemantSystemModel.FK_User_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjects_User" Association="SupportManagemantSystemModel.FK_UserProjects_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProject" EntitySet="UserProjects" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="pep_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CompanyProjects" Relationship="SupportManagemantSystemModel.FK_CompanyProject_Company" FromRole="Company" ToRole="CompanyProject" />
+          <NavigationProperty Name="CompanyUsers" Relationship="SupportManagemantSystemModel.FK_CompanyUser_Company" FromRole="Company" ToRole="CompanyUser" />
+          <NavigationProperty Name="Duties" Relationship="SupportManagemantSystemModel.FK_Duty_Company" FromRole="Company" ToRole="Duty" />
+          <NavigationProperty Name="Errors" Relationship="SupportManagemantSystemModel.FK_Error_Company" FromRole="Company" ToRole="Error" />
+          <NavigationProperty Name="Executes" Relationship="SupportManagemantSystemModel.FK_Executes_Company" FromRole="Company" ToRole="Execute" />
+          <NavigationProperty Name="MessageRecievers" Relationship="SupportManagemantSystemModel.FK_messageReciever_Company" FromRole="Company" ToRole="MessageReciever" />
+          <NavigationProperty Name="Queries" Relationship="SupportManagemantSystemModel.FK_Query_Company" FromRole="Company" ToRole="Query" />
+          <NavigationProperty Name="Tasks" Relationship="SupportManagemantSystemModel.FK_Task_Company" FromRole="Company" ToRole="Task" />
+          <NavigationProperty Name="Tickets" Relationship="SupportManagemantSystemModel.FK_ticket_Company" FromRole="Company" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="CompanyProject">
+          <Key>
+            <PropertyRef Name="companyProjectID" />
+          </Key>
+          <Property Name="companyProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="projectID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_CompanyProject_Company" FromRole="CompanyProject" ToRole="Company" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_CompanyProject_Project" FromRole="CompanyProject" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="CompanyUser">
+          <Key>
+            <PropertyRef Name="companyUserID" />
+          </Key>
+          <Property Name="companyUserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_CompanyUser_Company" FromRole="CompanyUser" ToRole="Company" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_CompanyUser_User" FromRole="CompanyUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Doing">
+          <Key>
+            <PropertyRef Name="doingID" />
+          </Key>
+          <Property Name="doingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startdate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="dutyID" Type="Int64" />
+          <Property Name="timeDistanse" Type="Int32" />
+          <NavigationProperty Name="Duty" Relationship="SupportManagemantSystemModel.FK_Doing_Duty" FromRole="Doing" ToRole="Duty" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_Doing_User" FromRole="Doing" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Duty">
+          <Key>
+            <PropertyRef Name="dutyID" />
+          </Key>
+          <Property Name="dutyID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="requiredTime" Type="Int32" />
+          <Property Name="piorityID" Type="Byte" />
+          <Property Name="done" Type="Boolean" />
+          <Property Name="requestID" Type="Int64" />
+          <Property Name="registerID" Type="Int32" />
+          <Property Name="referedToUserID" Type="Int32" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_Duty_Company" FromRole="Duty" ToRole="Company" />
+          <NavigationProperty Name="Doings" Relationship="SupportManagemantSystemModel.FK_Doing_Duty" FromRole="Duty" ToRole="Doing" />
+          <NavigationProperty Name="Piority" Relationship="SupportManagemantSystemModel.FK_Duty_Piority" FromRole="Duty" ToRole="Piority" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_Duty_Project" FromRole="Duty" ToRole="Project" />
+          <NavigationProperty Name="Request" Relationship="SupportManagemantSystemModel.FK_Duty_Request" FromRole="Duty" ToRole="Request" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_Duty_User" FromRole="Duty" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="SupportManagemantSystemModel.FK_Duty_User1" FromRole="Duty" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="errorID" />
+          </Key>
+          <Property Name="errorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="errorCodes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="done" Type="Boolean" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_Error_Company" FromRole="Error" ToRole="Company" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_Error_Project" FromRole="Error" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Execute">
+          <Key>
+            <PropertyRef Name="executID" />
+          </Key>
+          <Property Name="executID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="queryID" Type="Int64" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_Executes_Company" FromRole="Execute" ToRole="Company" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_Executes_Project" FromRole="Execute" ToRole="Project" />
+          <NavigationProperty Name="Query" Relationship="SupportManagemantSystemModel.FK_Executes_Queries" FromRole="Execute" ToRole="Query" />
+        </EntityType>
+        <EntityType Name="EXEFile">
+          <Key>
+            <PropertyRef Name="exeID" />
+          </Key>
+          <Property Name="exeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="changes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="messageID" />
+          </Key>
+          <Property Name="messageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MessageRecievers" Relationship="SupportManagemantSystemModel.FK_messageReciever_Message" FromRole="Message" ToRole="MessageReciever" />
+          <NavigationProperty Name="TicketFiles" Relationship="SupportManagemantSystemModel.FK_TicketFile_Message" FromRole="Message" ToRole="TicketFile" />
+        </EntityType>
+        <EntityType Name="MessageReciever">
+          <Key>
+            <PropertyRef Name="messageRecieverID" />
+          </Key>
+          <Property Name="messageRecieverID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="messageID" Type="Int64" />
+          <Property Name="seen" Type="Boolean" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_messageReciever_Company" FromRole="MessageReciever" ToRole="Company" />
+          <NavigationProperty Name="Message" Relationship="SupportManagemantSystemModel.FK_messageReciever_Message" FromRole="MessageReciever" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Piority">
+          <Key>
+            <PropertyRef Name="piorityID" />
+          </Key>
+          <Property Name="piorityID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="piorityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Duties" Relationship="SupportManagemantSystemModel.FK_Duty_Piority" FromRole="Piority" ToRole="Duty" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="projectID" />
+          </Key>
+          <Property Name="projectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompanyProjects" Relationship="SupportManagemantSystemModel.FK_CompanyProject_Project" FromRole="Project" ToRole="CompanyProject" />
+          <NavigationProperty Name="Duties" Relationship="SupportManagemantSystemModel.FK_Duty_Project" FromRole="Project" ToRole="Duty" />
+          <NavigationProperty Name="Errors" Relationship="SupportManagemantSystemModel.FK_Error_Project" FromRole="Project" ToRole="Error" />
+          <NavigationProperty Name="Executes" Relationship="SupportManagemantSystemModel.FK_Executes_Project" FromRole="Project" ToRole="Execute" />
+          <NavigationProperty Name="Queries" Relationship="SupportManagemantSystemModel.FK_Query_Project" FromRole="Project" ToRole="Query" />
+          <NavigationProperty Name="Tasks" Relationship="SupportManagemantSystemModel.FK_Task_Project" FromRole="Project" ToRole="Task" />
+          <NavigationProperty Name="Tickets" Relationship="SupportManagemantSystemModel.FK_ticket_Project" FromRole="Project" ToRole="Ticket" />
+          <NavigationProperty Name="UserProjects" Relationship="SupportManagemantSystemModel.FK_UserProjects_Project" FromRole="Project" ToRole="UserProject" />
+        </EntityType>
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="queryID" />
+          </Key>
+          <Property Name="queryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="queryCommand" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="type" Type="Byte" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_Query_Company" FromRole="Query" ToRole="Company" />
+          <NavigationProperty Name="Executes" Relationship="SupportManagemantSystemModel.FK_Executes_Queries" FromRole="Query" ToRole="Execute" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_Query_Project" FromRole="Query" ToRole="Project" />
+          <NavigationProperty Name="QueryType" Relationship="SupportManagemantSystemModel.FK_Query_QueryType" FromRole="Query" ToRole="QueryType" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_Query_User" FromRole="Query" ToRole="User" />
+        </EntityType>
+        <EntityType Name="QueryType">
+          <Key>
+            <PropertyRef Name="queryTypeID" />
+          </Key>
+          <Property Name="queryTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Queries" Relationship="SupportManagemantSystemModel.FK_Query_QueryType" FromRole="QueryType" ToRole="Query" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="requestID" />
+          </Key>
+          <Property Name="requestID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketID" Type="Int64" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="askerID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Duties" Relationship="SupportManagemantSystemModel.FK_Duty_Request" FromRole="Request" ToRole="Duty" />
+          <NavigationProperty Name="Ticket" Relationship="SupportManagemantSystemModel.FK_Request_ticket" FromRole="Request" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_Request_User" FromRole="Request" ToRole="User" />
+          <NavigationProperty Name="Responses" Relationship="SupportManagemantSystemModel.FK_Response_Request" FromRole="Request" ToRole="Response" />
+          <NavigationProperty Name="TicketFiles" Relationship="SupportManagemantSystemModel.FK_TicketFile_Request" FromRole="Request" ToRole="TicketFile" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="responseID" />
+          </Key>
+          <Property Name="responseID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketID" Type="Int64" />
+          <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="answererID" Type="Int32" />
+          <Property Name="estimatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="requestID" Type="Int64" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Request" Relationship="SupportManagemantSystemModel.FK_Response_Request" FromRole="Response" ToRole="Request" />
+          <NavigationProperty Name="Ticket" Relationship="SupportManagemantSystemModel.FK_Response_ticket" FromRole="Response" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_Response_User" FromRole="Response" ToRole="User" />
+          <NavigationProperty Name="TicketFiles" Relationship="SupportManagemantSystemModel.FK_TicketFile_Response" FromRole="Response" ToRole="TicketFile" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="SupportManagemantSystemModel.FK_ticket_Status" FromRole="Status" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskID" />
+          </Key>
+          <Property Name="taskID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="decription" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="spentTime" Type="Double" />
+          <Property Name="ticketID" Type="Int64" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_Task_Company" FromRole="Task" ToRole="Company" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_Task_Project" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="Ticket" Relationship="SupportManagemantSystemModel.FK_Task_Ticket" FromRole="Task" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_Task_User" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ticketID" />
+          </Key>
+          <Property Name="ticketID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="statusID" Type="Byte" />
+          <Property Name="callNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SupportManagemantSystemModel.FK_ticket_Company" FromRole="Ticket" ToRole="Company" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_ticket_Project" FromRole="Ticket" ToRole="Project" />
+          <NavigationProperty Name="Requests" Relationship="SupportManagemantSystemModel.FK_Request_ticket" FromRole="Ticket" ToRole="Request" />
+          <NavigationProperty Name="Responses" Relationship="SupportManagemantSystemModel.FK_Response_ticket" FromRole="Ticket" ToRole="Response" />
+          <NavigationProperty Name="Status" Relationship="SupportManagemantSystemModel.FK_ticket_Status" FromRole="Ticket" ToRole="Status" />
+          <NavigationProperty Name="Tasks" Relationship="SupportManagemantSystemModel.FK_Task_Ticket" FromRole="Ticket" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="TicketFile">
+          <Key>
+            <PropertyRef Name="ticketFileID" />
+          </Key>
+          <Property Name="ticketFileID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="requestID" Type="Int64" />
+          <Property Name="responseID" Type="Int64" />
+          <Property Name="messageID" Type="Int64" />
+          <NavigationProperty Name="Message" Relationship="SupportManagemantSystemModel.FK_TicketFile_Message" FromRole="TicketFile" ToRole="Message" />
+          <NavigationProperty Name="Request" Relationship="SupportManagemantSystemModel.FK_TicketFile_Request" FromRole="TicketFile" ToRole="Request" />
+          <NavigationProperty Name="Response" Relationship="SupportManagemantSystemModel.FK_TicketFile_Response" FromRole="TicketFile" ToRole="Response" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userGroupID" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompanyUsers" Relationship="SupportManagemantSystemModel.FK_CompanyUser_User" FromRole="User" ToRole="CompanyUser" />
+          <NavigationProperty Name="Doings" Relationship="SupportManagemantSystemModel.FK_Doing_User" FromRole="User" ToRole="Doing" />
+          <NavigationProperty Name="Duties" Relationship="SupportManagemantSystemModel.FK_Duty_User" FromRole="User" ToRole="Duty" />
+          <NavigationProperty Name="Duties1" Relationship="SupportManagemantSystemModel.FK_Duty_User1" FromRole="User" ToRole="Duty" />
+          <NavigationProperty Name="Queries" Relationship="SupportManagemantSystemModel.FK_Query_User" FromRole="User" ToRole="Query" />
+          <NavigationProperty Name="Requests" Relationship="SupportManagemantSystemModel.FK_Request_User" FromRole="User" ToRole="Request" />
+          <NavigationProperty Name="Responses" Relationship="SupportManagemantSystemModel.FK_Response_User" FromRole="User" ToRole="Response" />
+          <NavigationProperty Name="Tasks" Relationship="SupportManagemantSystemModel.FK_Task_User" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="UserGroup" Relationship="SupportManagemantSystemModel.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
+          <NavigationProperty Name="UserProjects" Relationship="SupportManagemantSystemModel.FK_UserProjects_User" FromRole="User" ToRole="UserProject" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="userGroupID" />
+          </Key>
+          <Property Name="userGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="SupportManagemantSystemModel.FK_User_UserGroup" FromRole="UserGroup" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserProject">
+          <Key>
+            <PropertyRef Name="userProjectID" />
+          </Key>
+          <Property Name="userProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="SupportManagemantSystemModel.FK_UserProjects_Project" FromRole="UserProject" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="SupportManagemantSystemModel.FK_UserProjects_User" FromRole="UserProject" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_CompanyProject_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.CompanyProject" Role="CompanyProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyProject">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyUser_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.CompanyUser" Role="CompanyUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyUser">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Error_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Error" Role="Error" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Error">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executes_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Execute" Role="Execute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Execute">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_messageReciever_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.MessageReciever" Role="MessageReciever" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="MessageReciever">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Query" Role="Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_Company">
+          <End Type="SupportManagemantSystemModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyProject_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.CompanyProject" Role="CompanyProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="CompanyProject">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyUser_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.CompanyUser" Role="CompanyUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="CompanyUser">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doing_Duty">
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Doing" Role="Doing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duty">
+              <PropertyRef Name="dutyID" />
+            </Principal>
+            <Dependent Role="Doing">
+              <PropertyRef Name="dutyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doing_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Doing" Role="Doing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Doing">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Piority">
+          <End Type="SupportManagemantSystemModel.Piority" Role="Piority" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piority">
+              <PropertyRef Name="piorityID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="piorityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_Request">
+          <End Type="SupportManagemantSystemModel.Request" Role="Request" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="registerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Duty_User1">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Duty" Role="Duty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Duty">
+              <PropertyRef Name="referedToUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Error_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Error" Role="Error" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Error">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executes_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Execute" Role="Execute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Execute">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executes_Queries">
+          <End Type="SupportManagemantSystemModel.Query" Role="Query" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Execute" Role="Execute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Query">
+              <PropertyRef Name="queryID" />
+            </Principal>
+            <Dependent Role="Execute">
+              <PropertyRef Name="queryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_messageReciever_Message">
+          <End Type="SupportManagemantSystemModel.Message" Role="Message" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.MessageReciever" Role="MessageReciever" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="messageID" />
+            </Principal>
+            <Dependent Role="MessageReciever">
+              <PropertyRef Name="messageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketFile_Message">
+          <End Type="SupportManagemantSystemModel.Message" Role="Message" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.TicketFile" Role="TicketFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="messageID" />
+            </Principal>
+            <Dependent Role="TicketFile">
+              <PropertyRef Name="messageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Query" Role="Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjects_Project">
+          <End Type="SupportManagemantSystemModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.UserProject" Role="UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_QueryType">
+          <End Type="SupportManagemantSystemModel.QueryType" Role="QueryType" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Query" Role="Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QueryType">
+              <PropertyRef Name="queryTypeID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Query" Role="Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_ticket">
+          <End Type="SupportManagemantSystemModel.Ticket" Role="Ticket" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="ticketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="askerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Request">
+          <End Type="SupportManagemantSystemModel.Request" Role="Request" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketFile_Request">
+          <End Type="SupportManagemantSystemModel.Request" Role="Request" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.TicketFile" Role="TicketFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="TicketFile">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_ticket">
+          <End Type="SupportManagemantSystemModel.Ticket" Role="Ticket" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="ticketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="answererID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketFile_Response">
+          <End Type="SupportManagemantSystemModel.Response" Role="Response" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.TicketFile" Role="TicketFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="responseID" />
+            </Principal>
+            <Dependent Role="TicketFile">
+              <PropertyRef Name="responseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_Status">
+          <End Type="SupportManagemantSystemModel.Status" Role="Status" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Ticket">
+          <End Type="SupportManagemantSystemModel.Ticket" Role="Ticket" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ticketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SupportManagemantSystemModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserGroup">
+          <End Type="SupportManagemantSystemModel.UserGroup" Role="UserGroup" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="userGroupID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="userGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjects_User">
+          <End Type="SupportManagemantSystemModel.User" Role="User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SupportManagemantSystemModel.UserProject" Role="UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SupportManagemantSystemModelStoreContainer" CdmEntityContainer="SupportManagemantSystemEntities">
+          <FunctionImportMapping FunctionImportName="GetLastExecute" FunctionName="SupportManagemantSystemModel.Store.GetLastExecute" />
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyProjects">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.CompanyProject">
+              <MappingFragment StoreEntitySet="CompanyProject">
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="companyProjectID" ColumnName="companyProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyUsers">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.CompanyUser">
+              <MappingFragment StoreEntitySet="CompanyUser">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="companyUserID" ColumnName="companyUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doings">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Doing">
+              <MappingFragment StoreEntitySet="Doing">
+                <ScalarProperty Name="timeDistanse" ColumnName="timeDistanse" />
+                <ScalarProperty Name="dutyID" ColumnName="dutyID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="doingID" ColumnName="doingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Duties">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Duty">
+              <MappingFragment StoreEntitySet="Duty">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="referedToUserID" ColumnName="referedToUserID" />
+                <ScalarProperty Name="registerID" ColumnName="registerID" />
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+                <ScalarProperty Name="done" ColumnName="done" />
+                <ScalarProperty Name="piorityID" ColumnName="piorityID" />
+                <ScalarProperty Name="requiredTime" ColumnName="requiredTime" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="dutyID" ColumnName="dutyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Errors">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Error">
+              <MappingFragment StoreEntitySet="Error">
+                <ScalarProperty Name="done" ColumnName="done" />
+                <ScalarProperty Name="errorCodes" ColumnName="errorCodes" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="errorID" ColumnName="errorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Executes">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Execute">
+              <MappingFragment StoreEntitySet="Execute">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="queryID" ColumnName="queryID" />
+                <ScalarProperty Name="executID" ColumnName="executID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXEFiles">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.EXEFile">
+              <MappingFragment StoreEntitySet="EXEFile">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="changes" ColumnName="changes" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="exeID" ColumnName="exeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="messageID" ColumnName="messageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageRecievers">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.MessageReciever">
+              <MappingFragment StoreEntitySet="MessageReciever">
+                <ScalarProperty Name="seen" ColumnName="seen" />
+                <ScalarProperty Name="messageID" ColumnName="messageID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="messageRecieverID" ColumnName="messageRecieverID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Piorities">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Piority">
+              <MappingFragment StoreEntitySet="Piority">
+                <ScalarProperty Name="piorityName" ColumnName="piorityName" />
+                <ScalarProperty Name="piorityID" ColumnName="piorityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Queries">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Query">
+              <MappingFragment StoreEntitySet="Query">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="queryCommand" ColumnName="queryCommand" />
+                <ScalarProperty Name="queryID" ColumnName="queryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueryTypes">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.QueryType">
+              <MappingFragment StoreEntitySet="QueryType">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="queryTypeID" ColumnName="queryTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="askerID" ColumnName="askerID" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+                <ScalarProperty Name="estimatedDate" ColumnName="estimatedDate" />
+                <ScalarProperty Name="answererID" ColumnName="answererID" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+                <ScalarProperty Name="responseID" ColumnName="responseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+                <ScalarProperty Name="spentTime" ColumnName="spentTime" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="decription" ColumnName="decription" />
+                <ScalarProperty Name="taskID" ColumnName="taskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="callNumber" ColumnName="callNumber" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketFiles">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.TicketFile">
+              <MappingFragment StoreEntitySet="TicketFile">
+                <ScalarProperty Name="messageID" ColumnName="messageID" />
+                <ScalarProperty Name="responseID" ColumnName="responseID" />
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="ticketFileID" ColumnName="ticketFileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProjects">
+            <EntityTypeMapping TypeName="SupportManagemantSystemModel.UserProject">
+              <MappingFragment StoreEntitySet="UserProjects">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="userProjectID" ColumnName="userProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

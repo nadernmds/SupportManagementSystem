@@ -1,0 +1,95 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Duty>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>کارتابل</h2>
+@{
+    var state = new SupportManagemantSystem.Models.SupportManagemantSystemEntities()
+        .Doings.FirstOrDefault(c => c.endDate.HasValue == false)
+        ?? new SupportManagemantSystem.Models.Doing() { endDate = Common.GetDate() };
+}
+@foreach (var item in Model)
+{
+    <div class="row" id="@item.dutyID">
+        <div class="col-md-9">
+            <div class="panel  panel-yellow">
+                <div class="panel-heading">
+                    <a onclick="" href="javascript:" style="color:white">
+                        @item.title
+                        <span class="pull-left">@item.Piority.piorityName</span>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p>
+                                @item.description
+                            </p>
+                        </div>
+
+                        <div class="col-md-3">
+                            <button class="btn btn-default start @(("disabled").Replace("disabled",@item.Doings.Any(c => c.doingID == state.doingID && c.endDate.HasValue==true) || state.doingID==0 ?"":"disabled"))" onclick=" start(@item.dutyID,this)">شروع</button>
+                            <button class="btn btn-default stop @(("disabled").Replace("disabled",item.Doings.Any(c=> c.doingID==state.doingID)?"":"disabled"))" onclick="stop(@item.dutyID,this)">پایان</button>
+                            <button class="btn btn-default  " onclick="End(@item.dutyID,this)">انجام شد</button>
+
+                            @*<button class="btn btn-default start @(item.Doings.Any(c=> c.doingID== state.doingID)   ? "disabled":" ")  onclick="start(@item.dutyID,this)">شروع</button>
+                                <button class="btn btn-default stop @(item.Doings.Any(c=> c.doingID== state.doingID)  ? " " : "disabled" )" onclick="stop(@item.dutyID,this)">پایان</button>*@
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="panel-footer">
+                    @item.Project.name
+                    <span class="pull-left">زمان پیش بینی شده @item.requiredTime دقیقه</span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script>
+        function start(id, context) {
+            $.ajax('/duty/start/?id=' + id).success(function (d) {
+                if (d == "1") {
+                    $('.start').addClass('disabled');
+                    $('.stop').addClass('disabled');
+                    $(context).next('button').removeClass('disabled');
+                }
+            })
+        }
+        function stop(id, context) {
+            $.ajax('/duty/stop/?id=' + id).success(function (d) {
+                if (d == "1") {
+                    $('.stop').addClass('disabled');
+                    $('.start').removeClass('disabled');
+                }
+            })
+        }
+        function End(id, context) {
+            var r = confirm('آیا  مطمئن هستید؟؟؟؟');
+            if (r == true) {
+                $.ajax('/duty/End/?id=' + id).success(function (d) {
+                    if (d == "1") {
+                        $('#' + id).remove();
+                    }
+                    else {
+                        alert('ابتدا پایان و سپس انجام کار را کلیک نمایید');
+                    }
+                });
+            }
+        }
+
+        $('.disabled').click(function (e) {
+            console.log('override?');
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+
+        //$(this).parent().parent().slideToggle();
+    </script>
+}

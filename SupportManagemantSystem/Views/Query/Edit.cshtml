@@ -1,0 +1,59 @@
+﻿@model SupportManagemantSystem.Models.Query
+
+@{
+    ViewBag.Title = "ویرایش";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+<style>
+    select, input {
+        max-width: unset !important;
+    }
+</style>
+<link href="~/Content/bootstrap-markdown.min.css" rel="stylesheet" />
+<h2>ویرایش</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.queryID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.queryCommand, htmlAttributes: new { @class = "control-label col-md-3" })
+
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <textarea id="pep" style="text-align:left;direction:ltr" @*data-width="450"*@ name="queryCommand" data-provide="markdown" rows="15">@Model.queryCommand</textarea>
+            </div>
+            @Html.ValidationMessageFor(model => model.queryCommand, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">نوع </label>
+            <div class="col-md-5">
+                @Html.DropDownList("type",null, htmlAttributes: new { @class = "form-control", style = "direction:ltr;" })
+                @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("بازگشت", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-markdown.js"></script>
+
+    <script src="~/Scripts/bootstrap-markdown.fa.js"></script>
+    <script>
+        $("#pep").markdown({ language: 'fa' })
+    </script>
+}

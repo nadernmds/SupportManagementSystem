@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>پروژه ها</h2>
+
+<p>
+    @Html.ActionLink("جدید", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id=item.projectID }) |
+            @Html.ActionLink("حذف", "Delete", new { id=item.projectID })
+        </td>
+    </tr>
+}
+
+</table>

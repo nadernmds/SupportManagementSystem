@@ -1,0 +1,44 @@
+﻿@model  IEnumerable<SupportManagemantSystem.Models.WorkSheet>
+
+@{
+    int i = 1;
+}
+<table class="table">
+    <tr>
+        <th>ردیف</th>
+        <th>
+            زمان صرف شده
+        </th>
+        <th>
+            پروژه
+        </th>
+        <th>
+            شرکت
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Where(c => c.Minutes > 0))
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Minutes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.projectName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>جمع کل</td>
+        <td>
+            @Model.Sum(c => c.Minutes)
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>

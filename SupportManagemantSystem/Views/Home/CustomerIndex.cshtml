@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "پنل مشتری";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>پنل مدیریت</h2>
+<h3>@ViewData["message"]</h3>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-send fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>ارسال تیک پشتیبانی</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/ticket/selectCompany">
+                <div class="panel-footer">
+                    <span>ارسال</span>
+                    <span><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-send fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>تیکت های من</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/ticket/mytickets">
+                <div class="panel-footer">
+                    <span>مشاهده</span>
+                    <span><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-send fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>پیام های من</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/message/mymessages">
+                <div class="panel-footer">
+                    <span>مشاهده</span>
+                    <span><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-send fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>ارسال گزارش خطای آپدیت</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/query/Error">
+                <div class="panel-footer">
+                    <span>مشاهده</span>
+                    <span><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-send fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>دریافت تنظیمات آپدیت</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/query/selectCompany">
+                <div class="panel-footer">
+                    <span>مشاهده</span>
+                    <span><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

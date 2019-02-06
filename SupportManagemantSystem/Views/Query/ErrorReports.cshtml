@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Error>
+
+@{
+    ViewBag.Title = "ErrorReports";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>گزارشات خطاها</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.errorCodes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.name)
+        </th>
+        <th>بررسی شده</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.errorCodes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.name)
+            </td>
+            <td>
+
+
+                <form  action="/Query/ErrorFixed" method="post">
+                    <button class="btn @(!item.done.Value?"btn-default":"btn-danger")  " name="done" value="@item.errorID">@(!item.done.Value ? "بررسی شد" : "قبلا بررسی شده است")</button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>

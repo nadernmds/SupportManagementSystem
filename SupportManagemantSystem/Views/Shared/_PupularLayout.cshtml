@@ -1,0 +1,114 @@
+﻿@using SupportManagemantSystem.Models;
+@{
+
+    ViewBag.Title = "پشتیبانی";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new SupportManagemantSystemEntities();
+    var user = (User)Session["RPG"] ?? new User();
+}
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">پنل مدیریت</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div id="panels" class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">&nbsp;</div>
+                            <div>پیام ها</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/message">
+                    <div class="panel-footer">
+                        <span>مشاهده</span>
+                        <span><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">&nbsp;</div>
+                            <div>کارکرد</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/task">
+                    <div class="panel-footer">
+                        <span>مشاهده</span>
+                        <span><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">&nbsp;</div>
+                            <div>وظایف</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/duty/userpanel">
+                    <div class="panel-footer">
+                        <span>کارتابل من</span>
+                        <span><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@db.Tickets.Where(c => c.statusID != 4).Count()</div>
+                            <div>تیکت ها</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/ticket">
+                    <div class="panel-footer">
+                        <span>مشاهده</span>
+                        <span><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="direction:rtl !important;text-align:right !important">
+        @RenderBody()
+    </div>
+
+@section Scripts{
+    @RenderSection("Scripts", false)
+}

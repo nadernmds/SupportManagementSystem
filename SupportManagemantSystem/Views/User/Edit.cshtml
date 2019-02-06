@@ -1,0 +1,99 @@
+﻿@model SupportManagemantSystem.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>ویرایش</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.userID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">گروه کاربری </label>          
+             <div class="col-md-10">
+                @Html.DropDownList("userGroupID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.userGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>عضو شرکت</label>
+            </div>
+            <div class="col-md-10">
+                @foreach (var item in new SupportManagemantSystem.Models.SupportManagemantSystemEntities().Companies)
+                {
+                    <label>@item.name</label>
+                    <input type="checkbox" name="CompanyID" value="@item.CompanyID"   @(Model.CompanyUsers.Any(c=> c.companyID==item.CompanyID)?"checked":"") />
+                }
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>پشتیبان سیستم(فقط برای برنامه نویسان)</label>
+            </div>
+            <div class="col-md-10">
+                @foreach (var item in new SupportManagemantSystem.Models.SupportManagemantSystemEntities().Projects)
+                {
+                    <label>@item.name</label>
+                    <input type="checkbox" name="ProjectID" value="@item.projectID" @(Model.UserProjects.Any(c => c.projectID == item.projectID) ? "checked" : "") />
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ثبت" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("بازگشت", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

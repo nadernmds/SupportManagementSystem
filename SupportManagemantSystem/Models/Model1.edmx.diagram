@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd7c38b2acb3493cbb2fc047cdfab4fb" Name="Diagram1" ZoomLevel="80" DisplayType="false" ShowGrid="false">
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Company" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.CompanyProject" Width="1.5" PointX="13.5" PointY="17.25" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.CompanyUser" Width="1.5" PointX="8.25" PointY="15.875" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Doing" Width="1.5" PointX="9.75" PointY="12.125" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Duty" Width="1.5" PointX="7.5" PointY="9.875" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Error" Width="1.5" PointX="13.5" PointY="10.125" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Execute" Width="1.5" PointX="10.5" PointY="19.5" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.EXEFile" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Message" Width="1.5" PointX="10.5" PointY="9" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.MessageReciever" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Piority" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Project" Width="1.5" PointX="5.25" PointY="24.875" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Query" Width="1.5" PointX="5.25" PointY="15.125" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.QueryType" Width="1.5" PointX="3" PointY="20" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Request" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Response" Width="1.5" PointX="10.5" PointY="15.5" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Status" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.sysdiagram" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Task" Width="1.5" PointX="5.25" PointY="20.125" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.Ticket" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.TicketFile" Width="1.5" PointX="12.75" PointY="13.75" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.User" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.UserGroup" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="SupportManagemantSystemModel.UserProject" Width="1.5" PointX="8.25" PointY="18.875" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_CompanyProject_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_CompanyUser_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Duty_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Error_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Executes_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_messageReciever_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Query_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Task_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_ticket_Company" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_CompanyProject_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_CompanyUser_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Doing_Duty" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Doing_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Duty_Piority" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Duty_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Duty_Request" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Duty_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Duty_User1" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Error_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Executes_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Executes_Queries" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_messageReciever_Message" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_TicketFile_Message" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Query_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Task_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_ticket_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_UserProjects_Project" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Query_QueryType" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Query_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Request_ticket" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Request_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Response_Request" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_TicketFile_Request" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Response_ticket" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Response_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_TicketFile_Response" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_ticket_Status" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Task_Ticket" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_Task_User" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_User_UserGroup" />
+        <AssociationConnector Association="SupportManagemantSystemModel.FK_UserProjects_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,93 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/metisMenu.min.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin-2.min.css" rel="stylesheet" />
+
+    <link href="~/Content/morris.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        @@font-face {
+            font-family: 'IRANSans';
+            src: url('/fonts/IRANSansWeb(FaNum).woff');
+            src: local('☺'), url('/fonts/IRANSansWeb(FaNum).woff') format('woff');
+        }
+
+        html, body, p {
+            font-family: IRANSans;
+            text-align: right;
+        }
+
+        @@media (min-width: 992px) {
+            .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+                float: right;
+            }
+        }
+
+        input, select {
+            max-width: 450px;
+        }
+
+        table, th, td {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+
+        .navbar-fixed-top {
+            left: auto !important;
+        }
+    </style>
+</head>
+<body style="background-image:url(/Images/bg.jpg);background-position:top;background-repeat:no-repeat;background-size:cover">
+    <div class="container" style="direction:rtl !important;">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">لطفا اطلاعات کاربری خود را وارد نمایید</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" action="Login" method="post">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="نام کاربری" name="username" type="text" autofocus="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="کلمه عبور" name="password" type="password" value="">
+                                </div>
+                                @*<div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>*@
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="submit" name="name" value="ورود"  class="btn btn-success btn-block"/> 
+                                <br /> 
+                                <h3 class="panel-title">@ViewBag.message</h3>
+                          </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/metisMenu.min.js"></script>
+    <script src="~/Scripts/raphael.min.js"></script>
+    @*<script src="~/Scripts/morris.min.js"></script>*@
+    @*<script src="~/Scripts/morris-data.js"></script>*@
+    <script src="~/Scripts/sb-admin-2.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+
+@ECHO OFF
+net share pep /delete /yes
+
+PAUSE
+CLS
+EXIT

@@ -1,0 +1,85 @@
+﻿@model  IEnumerable<SupportManagemantSystem.Models.Ticket>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>تیکت ها</h2>
+@foreach (var item in Model)
+{
+    <div class="col-lg-8 pull-right">
+        <div class="panel  panel-@(Common.getStateColor(item.statusID.Value))">
+            <div class="panel-heading">
+                <a href="/ticket/answer/@item.Requests.LastOrDefault().ticketID" style="color:white">
+                    @item.Requests.LastOrDefault().User.name : @item.title
+
+                    <span class="pull-left">@item.Status.state</span>
+                </a>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @item.Requests.LastOrDefault().text
+                </p>
+            </div>
+            <div class="panel-footer">
+                @item.Project.name
+                <span class="pull-left">شرکت: @item.Company.name</span>
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+}
+
+
+@*@foreach (var item in Model)
+{
+    if (item.Ticket1.Count > 0)
+    {
+        var ChildItem = item.Ticket1.LastOrDefault();
+        <div class="col-lg-8 pull-right">
+            <div class="panel  panel-@(Common.getStateColor(ChildItem.statusID.Value))">
+                <div class="panel-heading">
+                    <a href="/ticket/answer/@ChildItem.ticketID" style="color:white">
+                        @ChildItem.User1.name : @ChildItem.title
+
+                        <span class="pull-left">@ChildItem.Status.state</span>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        @ChildItem.text
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    @ChildItem.Project.name
+                    <span class="pull-left">شرکت: @ChildItem.Company.name</span>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+    }
+    else
+    {
+    <div class="col-lg-8 pull-right">
+        <div class="panel  panel-@(Common.getStateColor(item.statusID.Value))">
+            <div class="panel-heading">
+                <a href="/ticket/answer/@item.ticketID" style="color:white">
+                    @item.User1.name : @item.title
+
+                    <span class="pull-left">@item.Status.state</span>
+                </a>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @item.text
+                </p>
+            </div>
+            <div class="panel-footer">
+                @item.Project.name
+                <span class="pull-left">شرکت: @item.Company.name</span>
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+    }
+}*@

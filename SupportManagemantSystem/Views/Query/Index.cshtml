@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Query>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>لیست کوئری</h2>
+
+<p>
+    @Html.ActionLink("جدید", "Create")<hr />
+    @Html.ActionLink("مشکلات گزارش شده", "ErrorReports")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.queryCommand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueryType.name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.queryCommand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.username)
+            </td>
+            <td>
+                @Html.DisplayFor(c => item.QueryType.name)
+            </td>
+            <td>
+                @Html.ActionLink("ویرایش", "Edit", new { id = item.queryID }) |
+                @Html.ActionLink("مشاهده", "Details", new { id = item.queryID }) |
+                @Html.ActionLink("حذف", "Delete", new { id = item.queryID })
+            </td>
+        </tr>
+    }
+
+</table>

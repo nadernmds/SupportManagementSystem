@@ -1,0 +1,61 @@
+﻿body {
+    /* padding:30px;*/
+}
+
+body {
+    -webkit-print-color-adjust: exact !important;
+}
+
+tr {
+    width: 100%;
+}
+
+table, td, tr, th {
+    text-align: center !important;
+}
+
+@media print {
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        vertical-align: middle;
+    }
+
+    img {
+        border-radius: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    tr {
+        width: 100%;
+    }
+
+    .panel-heading, h1, #panels, #ReportForm {
+        display: none;
+    }
+
+    .printable {
+        top: 0;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+
+    /*td table td{
+        border:none!important
+    }
+    td table tr{
+        border:none;
+        border-bottom:1px solid gray;
+    }*/
+
+
+
+
+
+    td, th, tr {
+        text-align: center !important;
+        border: 1px solid black !important;
+        border-left: 1px solid black !important;
+    }
+}

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("پیام جدید", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>گیرندگان</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @foreach (var item2 in item.MessageRecievers)
+                {
+                    <span class="label label-@(item2.seen??false?"info":"danger") ">@item2.Company.name</span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("مشاهده", "Details", new { id = item.messageID }) 
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,175 @@
+﻿@using pep
+@model SupportManagemantSystem.Models.Ticket
+
+@{
+    ViewBag.Title = "Answer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    select, input {
+        max-width: unset !important;
+    }
+</style>
+<link href="~/Content/bootstrap-markdown.min.css" rel="stylesheet" />
+<br /><br />
+<div class="row">
+    @if (Model.Requests.Count > 0)
+    {
+        foreach (var request in Model.Requests)
+        {
+            <div class="col-lg-9 pull-right">
+                <div class="panel panel-@(Common.getStateColor(Model.statusID.Value))">
+                    <div class="panel-heading">
+                        @request.User.name : @Model.title
+                        درباره @Model.Project.name
+                        <span class="pull-left">@Model.Status.state| @request.date.Value.toPersianDateString()</span>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            @request.text
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+
+                        @Model.Company.name
+                        @if (request.TicketFiles.Count > 0)
+                        {
+                            <a href="/ticket/files/@request.requestID" class="pull-left">ضمایم</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            foreach (var response in request.Responses)
+            {
+                <div class="col-lg-9 pull-left">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @response.User.name : @Model.title
+                            درباره @Model.Project.name
+                            <span class="pull-left">@Model.Status.state | @response.date.Value.toPersianDateString()</span>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                @response.answer
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+
+                            @Model.Company.name
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+    <div style="direction:rtl !important ;text-align:right">
+        @*<div class="col-md-3"></div>*@
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>ارسال تیکت پشتیبانی</h2>
+
+                </div>
+                <div class="panel-body">
+                    <p>
+                    </p>
+
+                    @using (Html.BeginForm("ask", "ticket", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(c => c.ticketID)
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.projectID, "projectID", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-5">
+                                    @Html.DropDownList("projectID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.projectID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-lg-3" })
+                                <div class="col-md-5 col-sm-5 col-lg-5">
+                                    <textarea id="pep" @*data-width="450"*@ name="text" data-provide="markdown" rows="15"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.callNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.callNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.callNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="inputAttachments">ضمیمه ها</label>
+                                <div class="col-md-5">
+                                    <input type="file" name="file" multiple id="inputAttachments" class="form-control">
+                                    <div id="fileUploadsContainer"></div>
+                                    <p class="help-block">پسوند های مجاز: .zip, .jpg, .jpeg, .png, .rar, .bak, .doc, .txt, .docx</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="ارسال" class="btn btn-danger btn-outline" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div menuitemname="Recent Tickets" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-comment"></i>&nbsp;				تیکت های اخیر شما
+                    </h3>
+                </div>
+                <div class="list-group">
+                    @foreach (var item in new SupportManagemantSystem.Models.SupportManagemantSystemEntities().Tickets.Take(5))
+                    {
+                        <a menuitemname="Ticket #560705" href="#" class="list-group-item" id="Secondary_Sidebar-Recent_Tickets-Ticket_#560705">
+                            <div class="recent-ticket">
+                                <div class="truncate" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="#560705 - The service is unavailable.">#@item.ticketID - @item.title</div><small><span class="pull-left">5 ماه پیش</span><span style="color:#888888">@item.Status.state</span></small>
+                            </div>
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+@if(Model.statusID == 2)
+{
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>زمان تقریبی انجام درخواست شما @Model.Responses.LastOrDefault().estimatedDate</h3>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-markdown.js"></script>
+
+    <script src="~/Scripts/bootstrap-markdown.fa.js"></script>
+    <script>
+        $("#pep").markdown({ language: 'fa' })
+    </script>
+}

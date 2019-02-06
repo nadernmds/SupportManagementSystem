@@ -1,0 +1,59 @@
+﻿@model  IEnumerable<SupportManagemantSystem.Models.CompanyProjectWorkSheet>
+
+@{
+    int i = 1;
+    int row = 1;
+}
+<table class="table">
+    <tr>
+        <th rowspan="2">ردیف</th>
+        <th rowspan="2">
+            شرکت
+        </th>
+        <th rowspan="2">
+            جمع ساعات
+        </th>
+        <th colspan="2">
+            جزئیات
+        </th>
+    </tr>
+    <tr>
+        <th>
+            نام پروژه
+        </th>
+        <th>
+            زمان صرف شده
+        </th>
+    </tr>
+    @{
+
+    }
+    @foreach (var item in Model)
+    {
+        row = item.ProjectNames.Count();
+        <tr>
+            <td rowspan="@(row)">@(i++)</td>
+            <td rowspan="@(row)">
+                @item.CompanyName
+            </td>
+            <td rowspan="@row">
+                @item.hours
+            </td>
+            <td>@item.ProjectNames.First().ProjectName</td>
+            <td>@item.ProjectNames.First().hours</td>
+        </tr>
+        if (item.ProjectNames.Count()>0)
+        {
+
+        
+        foreach (var item2 in item.ProjectNames.Skip(1))
+        {
+            <tr>
+                <td>@item2.ProjectName</td>
+                <td>@item2.hours</td>
+            </tr>
+            }
+        }
+    }
+
+</table>

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.WorkSheet>
+@{
+    int i = 1;
+    int row = 1;
+}
+<table class="table">
+    <tr>
+        <th rowspan="2">ردیف</th>
+        <th rowspan="2">
+            زمان صرف شده
+        </th>
+        <th rowspan="2">
+            پروژه
+        </th>
+        <th rowspan="2">
+            شرکت
+        </th>
+        <th colspan="3" rowspan="1">
+            جزئیات کارکرد
+        </th>
+    </tr>
+    <tr>
+        <th>
+            کاربر
+        </th>
+        <th>
+            زمان صرف شده
+        </th>
+        <th>
+            تاریخ
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        row = item.User.Count();
+        <tr>
+            <td rowspan="@(row)">@(i++)</td>
+            <td rowspan="@(row)">
+                @Html.DisplayFor(modelItem => item.Minutes)
+            </td>
+            <td rowspan="@(row)">
+                @Html.DisplayFor(modelItem => item.projectName)
+            </td>
+
+            <td rowspan="@(row)">
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>@item.User.First().user</td>
+            <td>@item.User.First().Minutes</td>
+            <td>@item.User.First().PersianDate</td>
+        </tr>
+        if (item.User.Count() > 0)
+        {
+            foreach (var item2 in item.User.Skip(1))
+            {
+                <tr>
+                    <td>@item2.user</td>
+                    <td>@item2.Minutes</td>
+                    <td>@item2.PersianDate</td>
+                </tr>
+            }
+        }
+    }
+    <tr>
+        <td>جمع کل</td>
+        <td>
+            @Model.Sum(c => c.Minutes)
+        </td>
+        <td></td>
+        <td></td><td></td>
+<td></td><td></td>
+
+</table>

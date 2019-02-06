@@ -1,0 +1,41 @@
+﻿@model SupportManagemantSystem.Models.EXEFile
+
+@{
+    ViewBag.Title = "حذف";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+
+<h3>آیا مایل به حذف هستید؟</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.changes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.changes)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-default" /> |
+            @Html.ActionLink("بازگشت", "Index")
+        </div>
+    }
+</div>

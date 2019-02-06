@@ -1,0 +1,90 @@
+﻿@model SupportManagemantSystem.Models.Query
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+<style>
+    select, input {
+        max-width: unset !important;
+    }
+</style>
+<link href="~/Content/bootstrap-markdown.min.css" rel="stylesheet" />
+<h2>جدید</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div id="alert" class="alert alert-danger">
+
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.queryCommand, htmlAttributes: new { @class = "control-label col-md-3" })
+
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <textarea id="pep" style="text-align:left;direction:ltr" @*data-width="450"*@ name="queryCommand" data-provide="markdown" rows="15"></textarea>
+            </div>
+            @Html.ValidationMessageFor(model => model.queryCommand, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">نوع </label>
+            <div class="col-md-5">
+                @Html.DropDownList("type", null, htmlAttributes: new { @class = "form-control", style = "direction:ltr;" })
+                @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger", id = "type" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ثبت" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("بازگشت", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-markdown.js"></script>
+
+    <script src="~/Scripts/bootstrap-markdown.fa.js"></script>
+    <script>
+        $("#pep").markdown({ language: 'fa' })
+    </script>
+    <script>
+        $("#pep").on(" paste change", function () {
+            var t = $(this).val();
+            var clean = true;
+            if (~t.toLowerCase().indexOf('use ') || ~t.toLowerCase().indexOf(' use ')) {
+                $('#alert').html('نام دیتابیس در کوئری نوشته شده است');
+                clean = false;
+            }
+            if (clean) {
+                $('#alert').html('');
+            }
+            if (~t.toLowerCase().indexOf('create table') || ~t.toLowerCase().indexOf(' create table')) {
+                $('#type').val(1);
+            }
+            if (~t.toLowerCase().indexOf('alter table') || ~t.toLowerCase().indexOf(' alter table')) {
+                $('#type').val(2);
+            }
+            if ((~t.toLowerCase().indexOf('alter table') || ~t.toLowerCase().indexOf(' create table')) && ~t.toLowerCase().indexOf(' alter column')) {
+                $('#type').val(3);
+            }
+            if (~t.toLowerCase().indexOf('create procedure') || ~t.toLowerCase().indexOf(' create procedure')) {
+                $('#type').val(4);
+            }
+            if (~t.toLowerCase().indexOf('alter procedure') || ~t.toLowerCase().indexOf(' alter procedure')) {
+                $('#type').val(5);
+            }
+
+        });
+    </script>
+}

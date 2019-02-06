@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.EXEFile>
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("جدید", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.changes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id=item.exeID }) |
+            @Html.ActionLink("مشاهده", "Details", new { id=item.exeID }) |
+            @Html.ActionLink("حذف", "Delete", new { id=item.exeID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.Company>
+
+@{
+    ViewBag.Title = "انتخاب شرکت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <p>برای کدام شرکت میخواهید تیکت پشتیبانی ارسال کنید؟؟؟</p>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div style="direction:ltr !important" class="col-xs-3">
+                                <i class="fa fa-building fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"></div>
+                                <div>@item.name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/ticket/ask/@item.CompanyID">
+                        <div style="direction:ltr !important" class="panel-footer">
+                            <span>ارسال تیکت</span>
+                            <span><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>

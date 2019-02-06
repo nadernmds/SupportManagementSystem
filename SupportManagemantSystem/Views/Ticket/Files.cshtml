@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SupportManagemantSystem.Models.TicketFile>
+
+@{
+    ViewBag.Title = "Files";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>ضمایم</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            شماره
+        </th>
+        <th>
+            ارسال کننده
+        </th>
+        <th>
+            محتوا
+        </th>
+    </tr>
+    @{ int i = 1;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                ضمیمه شماره @i
+            </td>
+            <td>
+               
+                @(item.isAnswer ?? false ? item.Ticket.User?.name : item.Ticket.User1.name)
+            </td>
+            <td>
+                <a target="_blank" href="~/Files/@(item.ticketFileID.ToString())@item.fileName">دریافت</a>
+            </td>
+        </tr>
+        i++;
+    }
+
+</table>

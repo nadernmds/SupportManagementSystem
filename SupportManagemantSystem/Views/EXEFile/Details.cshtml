@@ -1,0 +1,36 @@
+﻿@model SupportManagemantSystem.Models.EXEFile
+
+@{
+    ViewBag.Title = "مشاهده";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+
+<h2>مشاهده</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.changes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.changes)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ویرایش", "Edit", new { id = Model.exeID }) |
+    @Html.ActionLink("بازگشت", "Index")
+</p>

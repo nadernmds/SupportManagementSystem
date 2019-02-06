@@ -1,0 +1,201 @@
+﻿@using SupportManagemantSystem.Models
+@using pep;
+@model SupportManagemantSystem.Models.Ticket
+
+@{
+    ViewBag.Title = "پاسخ";
+    Layout = "~/Views/Shared/_PupularLayout.cshtml";
+}
+<link href="~/Content/bootstrap-markdown.min.css" rel="stylesheet" />
+<br /><br />
+@foreach (var request in Model.Requests)
+{
+    <div class="col-lg-9 pull-right">
+        <div class="panel panel-@(Common.getStateColor(Model.statusID.Value))">
+            <div class="panel-heading">
+                @request.User.name : @Model.title
+                درباره @Model.Project.name
+                <span class="pull-left">@Model.Status.state | @request.date.Value.toPersianDateString()</span>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @request.text
+                </p>
+            </div>
+            <div class="panel-footer">
+
+                @Model.Company.name
+                @if (request.TicketFiles.Count > 0)
+                {
+                    <a href="/ticket/files/@request.requestID" class="pull-left">ضمایم</a>
+                }
+                <a href="~/duty/create/@request.requestID" class="pull-left">تعریف کار</a>
+            </div>
+        </div>
+    </div>
+    foreach (var response in request.Responses)
+    {
+        <div class="col-lg-9 pull-left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @response.User.name : @Model.title
+                    درباره @Model.Project.name
+                    <span class="pull-left">@Model.Status.state | @response.date.Value.toPersianDateString()</span>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        @response.answer
+                    </p>
+                </div>
+                <div class="panel-footer">
+
+                    @Model.Company.name
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+@*{
+        var Model = (this.Model.Ticket2 != null ? this.Model.Ticket2 : this.Model);
+    }
+    <div class="col-lg-9 pull-right">
+        <div class="panel panel-@(Common.getStateColor(Model.statusID.Value))">
+            <div class="panel-heading">
+                @Model.User1.name : @Model.title
+                درباره @Model.Project.name
+                <span class="pull-left">@Model.Status.state</span>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @Model.text
+                </p>
+            </div>
+            <div class="panel-footer">
+
+                @Model.Company.name
+                @if (Model.TicketFiles.Count > 0)
+                {
+                    <a href="/ticket/files/@Model.ticketID" class="pull-left">ضمایم</a>
+                }
+
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+    @if (Model.answererID.HasValue)
+    {
+
+    }
+    @foreach (var item in Model.Ticket1)
+    {
+        <div class="col-lg-9 pull-right">
+            <div class="panel panel-@(Common.getStateColor(item.statusID.Value))">
+                <div class="panel-heading">
+                    @item.User1.name : @item.title
+                    درباره @item.Project.name
+                    <span class="pull-left">@item.Status.state</span>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        @item.text
+                    </p>
+                </div>
+                <div class="panel-footer">
+
+                    @item.Company.name
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        if (item.answererID.HasValue)
+        {
+            <div class="col-lg-9 pull-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @item.User.name : @item.title
+                        درباره @item.Project.name
+                        @*<span class="pull-left">@Model.Status.state</span>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            @item.answer
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+
+                        @item.Company.name
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+        }
+    }*@
+
+<div class="col-md-9">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>پاسخ</h2>
+
+        </div>
+        <div class="panel-body">
+            <p>
+            </p>
+            @using (Html.BeginForm("answer", "ticket", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.Label("پاسخ", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-lg-3" })
+                        <div class="col-md-7">
+                            <textarea id="pep" @*data-width="450"*@ name="answer" data-provide="markdown" rows="15"></textarea>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(c => c.ticketID)
+                    @Html.HiddenFor(c=> c.Requests.LastOrDefault().requestID)
+                    <div class="form-group">
+                        @Html.Label("وضعیت", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-7">
+                            @Html.DropDownList("statusID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.statusID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("زمان تخمینی", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-lg-3" })
+                        <div class="col-md-7">
+                            <input type="text" name="estimatedDate" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="inputAttachments">ضمیمه ها</label>
+                        <div class="col-md-7">
+                            <input type="file" name="file" multiple id="inputAttachments" class="form-control">
+                            <div id="fileUploadsContainer"></div>
+                            <p class="help-block">پسوند های مجاز: .zip, .jpg, .jpeg, .png, .rar, .bak, .doc, .txt, .docx</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="ارسال" class="btn btn-danger btn-outline" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-markdown.js"></script>
+
+    <script src="~/Scripts/bootstrap-markdown.fa.js"></script>
+    <script>
+        $("#pep").markdown({ language: 'fa' })
+    </script>
+}
